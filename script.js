@@ -31,4 +31,17 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 
+//Axes helper
+const axesHelper = new THREE.AxesHelper();
+scene.add(axesHelper);
+
+//Move cube
+mesh.position.set(1, -1, 0);
+
+//Scale cube
+mesh.scale.set(2, 0.5, 0.5);
+
+//Rotate cube
+mesh.rotation.y = Math.PI / 2; //rotates 90 degrees
+
 renderer.render(scene, camera);
