@@ -1,33 +1,15 @@
 import * as THREE from 'three';
-console.log(THREE);
 
 //Scene
 const scene = new THREE.Scene();
 
 // Objects
-const group = new THREE.Group();
-scene.add(group);
-
 const cube1 = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
   new THREE.MeshBasicMaterial({ color: 0xff0000 })
 );
 
-group.add(cube1);
-
-const cube2 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-);
-cube2.position.set(-2, 0, 0);
-group.add(cube2);
-
-const cube3 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0x0000ff })
-);
-cube3.position.set(2, 0, 0);
-group.add(cube3);
+scene.add(cube1);
 
 // Sizes
 const sizes = {
@@ -54,12 +36,33 @@ const axesHelper = new THREE.AxesHelper();
 scene.add(axesHelper);
 
 //Move group
-group.position.set(0, 1, 0);
+cube1.position.set(0, 0, 0);
 
-//Scale group
-group.scale.set(1, 1.5, 1);
+//Time
+// let time = Date.now();
 
-//Rotate group
-group.rotation.y = 1;
+//Clock
+const clock = new THREE.Clock();
 
-renderer.render(scene, camera);
+//Animation
+const tick = () => {
+  //Time
+  // const currentTime = Date.now();
+  // const deltaTime = currentTime - time;
+  // time = currentTime;
+
+  //Clock
+  const elapsedTime = clock.getElapsedTime();
+
+  //Update objects
+  cube1.rotation.y = elapsedTime * Math.PI * 2;
+  cube1.position.y = Math.cos(elapsedTime);
+
+  //Render
+  renderer.render(scene, camera);
+
+  //Call tick again on the next frame
+  window.requestAnimationFrame(tick);
+};
+
+tick();
