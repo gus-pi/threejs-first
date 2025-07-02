@@ -4,12 +4,30 @@ console.log(THREE);
 //Scene
 const scene = new THREE.Scene();
 
-// Object
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
+// Objects
+const group = new THREE.Group();
+scene.add(group);
 
-scene.add(mesh);
+const cube1 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+);
+
+group.add(cube1);
+
+const cube2 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+);
+cube2.position.set(-2, 0, 0);
+group.add(cube2);
+
+const cube3 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0x0000ff })
+);
+cube3.position.set(2, 0, 0);
+group.add(cube3);
 
 // Sizes
 const sizes = {
@@ -35,13 +53,13 @@ renderer.setSize(sizes.width, sizes.height);
 const axesHelper = new THREE.AxesHelper();
 scene.add(axesHelper);
 
-//Move cube
-mesh.position.set(1, -1, 0);
+//Move group
+group.position.set(0, 1, 0);
 
-//Scale cube
-mesh.scale.set(2, 0.5, 0.5);
+//Scale group
+group.scale.set(1, 1.5, 1);
 
-//Rotate cube
-mesh.rotation.y = Math.PI / 2; //rotates 90 degrees
+//Rotate group
+group.rotation.y = 1;
 
 renderer.render(scene, camera);
