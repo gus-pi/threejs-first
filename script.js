@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import gsap from 'gsap';
 
 //Scene
 const scene = new THREE.Scene();
@@ -42,7 +43,10 @@ cube1.position.set(0, 0, 0);
 // let time = Date.now();
 
 //Clock
-const clock = new THREE.Clock();
+//const clock = new THREE.Clock();
+
+gsap.to(cube1.position, { duration: 1, delay: 1, x: 2 });
+gsap.to(cube1.position, { duration: 1, delay: 2, x: 0 });
 
 //Animation
 const tick = () => {
@@ -52,11 +56,11 @@ const tick = () => {
   // time = currentTime;
 
   //Clock
-  const elapsedTime = clock.getElapsedTime();
+  // const elapsedTime = clock.getElapsedTime();
 
   //Update objects
-  cube1.rotation.y = elapsedTime * Math.PI * 2;
-  cube1.position.y = Math.cos(elapsedTime);
+  // cube1.rotation.y = elapsedTime * Math.PI * 2;
+  // cube1.position.y = Math.cos(elapsedTime);
 
   //Render
   renderer.render(scene, camera);
